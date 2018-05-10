@@ -3,9 +3,6 @@ WORKDIR /root
 
 ARG CBOARD_BRANCH=branch-0.4.2
 
-# 下载源码切换分支
-RUN git clone https://github.com/TuiQiao/CBoard.git \
-    && git checkout -b ${CBOARD_BRANCH} origin/${CBOARD_BRANCH}
 
 # 安装 java maven
 RUN mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup \
@@ -13,6 +10,10 @@ RUN mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backu
 RUN yum install -y java-1.8.0-openjdk.x86_64 java-1.8.0-openjdk-devel.x86_64 wget vim git
 RUN wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo \
     && yum -y install apache-maven
+
+# 下载源码切换分支
+RUN git clone https://github.com/TuiQiao/CBoard.git \
+    && git checkout -b ${CBOARD_BRANCH} origin/${CBOARD_BRANCH}
 
 # 编译代码
 RUN mvn clean package && yes|cp ./CBoard/lib/*.jar ./CBoard/target/cboard/WEB-INF/lib/
