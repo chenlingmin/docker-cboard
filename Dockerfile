@@ -13,10 +13,10 @@ RUN wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-mave
 
 # 下载源码切换分支
 RUN git clone https://github.com/TuiQiao/CBoard.git \
-    && git checkout -b ${CBOARD_BRANCH} origin/${CBOARD_BRANCH}
+    && git -c "./Cboard" checkout -b ${CBOARD_BRANCH} origin/${CBOARD_BRANCH}
 
 # 编译代码
-RUN mvn clean package && yes|cp ./CBoard/lib/*.jar ./CBoard/target/cboard/WEB-INF/lib/
+RUN mvn -f ./Cboard/pom.xml clean package && yes|cp ./CBoard/lib/*.jar ./CBoard/target/cboard/WEB-INF/lib/
 
 # 安装tomcat phantomjs
 RUN wget http://mirror.bit.edu.cn/apache/tomcat/tomcat-8/v8.0.52/bin/apache-tomcat-8.0.52.tar.gz -P install \
