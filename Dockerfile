@@ -25,12 +25,12 @@ RUN yum install -y bzip2.x86_64
 RUN tar -zxf install/apache-tomcat-8.0.52.tar.gz -C /opt \
     && tar -jxf install/phantomjs-2.1.1-linux-x86_64.tar.bz2 -C /opt \
     && ln -s /opt/apache-tomcat-8.0.52 /opt/apache-tomcat \
-    && ln -s /opt/phantomjs-2.1.1-linux-i686 /opt/phantomjs-2.1.1
+    && ln -s /opt/phantomjs-2.1.1-linux-x86_64 /opt/phantomjs-2.1.1
 
 RUN rm -rf /opt/apache-tomcat-8.0.52/webapps/* 
-RUN mv /root/CBoard/target/cboard /opt/apache-tomcat-8.0.52/webapps/ROOT
+RUN mv /root/CBoard/target/cboard /cboard && ln -s /cboard /opt/apache-tomcat-8.0.52/webapps/ROOT
 
-RUN yum remove -y apache-maven bzip2.x86_64 java-1.8.0-openjdk-devel.x86_64 git
+RUN yum remove -y apache-maven bzip2.x86_64 java-1.8.0-openjdk-devel.x86_64 git wget vim
 RUN rm -rf /root/CBoard /root/.m2/ /root/install 
 
 EXPOSE 8080
