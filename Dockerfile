@@ -11,7 +11,7 @@ RUN wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-mave
     && yum -y install apache-maven
 
 # 下载源码切换分支
-RUN git clone -b ${CBOARD_BRANCH} --single-branch https://github.com/TuiQiao/CBoard.git 
+RUN git clone -b ${CBOARD_BRANCH} --single-branch https://github.com/chenlingmin/CBoard.git 
 
 # 编译代码
 RUN mvn -f /root/CBoard/pom.xml clean package && yes|cp /root/CBoard/lib/*.jar /root/CBoard/target/cboard/WEB-INF/lib/
