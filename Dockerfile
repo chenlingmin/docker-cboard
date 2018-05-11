@@ -33,5 +33,7 @@ RUN mv /root/CBoard/target/cboard /cboard && ln -s /cboard /opt/apache-tomcat-8.
 RUN yum remove -y apache-maven bzip2.x86_64 java-1.8.0-openjdk-devel.x86_64 git wget vim
 RUN rm -rf /root/CBoard /root/.m2/ /root/install 
 
+COPY docker-entrypoint.sh ./
+
 EXPOSE 8080
-CMD ["/opt/apache-tomcat/bin/startup.sh"]
+CMD ["docker-entrypoint.sh"]
