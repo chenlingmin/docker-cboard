@@ -12,7 +12,8 @@ RUN wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-mave
 
 # 下载源码切换分支
 RUN git clone https://github.com/TuiQiao/CBoard.git 
-RUN git -c "/root/Cboard" checkout -b "${CBOARD_BRANCH}" origin/"${CBOARD_BRANCH}"
+#RUN git -c "/root/Cboard" checkout -b "${CBOARD_BRANCH}" origin/"${CBOARD_BRANCH}"
+RUN git -c "/root/Cboard" checkout -b branch-0.4.2 origin/branch-0.4.2
 
 # 编译代码
 RUN mvn -f /root/Cboard/pom.xml clean package && yes|cp /root/CBoard/lib/*.jar /root/CBoard/target/cboard/WEB-INF/lib/
