@@ -34,6 +34,7 @@ RUN yum remove -y apache-maven bzip2.x86_64 java-1.8.0-openjdk-devel.x86_64 git 
 RUN rm -rf /root/CBoard /root/.m2/ /root/install 
 
 COPY docker-entrypoint.sh ./
+RUN chmod +x ./docker-entrypoint.sh
 
 EXPOSE 8080
 CMD ["docker-entrypoint.sh"]
