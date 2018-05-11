@@ -14,7 +14,7 @@ RUN wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-mave
 RUN git clone -b ${CBOARD_BRANCH} --single-branch https://github.com/TuiQiao/CBoard.git 
 
 # 编译代码
-RUN mvn -f /root/Cboard/pom.xml clean package && yes|cp /root/CBoard/lib/*.jar /root/CBoard/target/cboard/WEB-INF/lib/
+RUN mvn -f /root/CBoard/pom.xml clean package && yes|cp /root/CBoard/lib/*.jar /root/CBoard/target/cboard/WEB-INF/lib/
 
 # 安装tomcat phantomjs
 RUN wget http://mirror.bit.edu.cn/apache/tomcat/tomcat-8/v8.0.52/bin/apache-tomcat-8.0.52.tar.gz -P install \
@@ -28,10 +28,10 @@ RUN tar -zxf install/apache-tomcat-8.0.52.tar.gz -C /opt \
     && ln -s /opt/phantomjs-2.1.1-linux-i686 /opt/phantomjs-2.1.1
 
 RUN rm -rf /opt/apache-tomcat-8.0.52/webapps/* 
-RUN mv /root/Cboard/target/cboard /opt/apache-tomcat-8.0.52/webapps/ROOT
+RUN mv /root/CBoard/target/cboard /opt/apache-tomcat-8.0.52/webapps/ROOT
 
 RUN yum remove -y apache-maven bzip2.x86_64 java-1.8.0-openjdk-devel.x86_64 git
-RUN rm -rf /root/Cboard /root/.m2/ /root/install 
+RUN rm -rf /root/CBoard /root/.m2/ /root/install 
 
 EXPOSE 8080
 CMD ["/opt/apache-tomcat/bin/startup.sh"]
