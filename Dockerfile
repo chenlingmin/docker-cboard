@@ -1,7 +1,7 @@
 FROM centos:7.2.1511
 WORKDIR /root
 
-ARG CBOARD_BRANCH=branch-0.4.2
+ARG CBOARD_BRANCH=branch-0.4.2-nfq
 
 # 安装 java maven
 RUN mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup \
